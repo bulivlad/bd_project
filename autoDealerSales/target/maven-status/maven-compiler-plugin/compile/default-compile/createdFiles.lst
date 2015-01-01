@@ -1,0 +1,16 @@
+ro\autoDealerSales\web\domain\Address.class
+ro\autoDealerSales\web\domain\Customer.class
+ro\autoDealerSales\web\dao\CustomerControllerImpl.class
+ro\autoDealerSales\web\servlets\LoginServlet.class
+ro\autoDealerSales\web\domain\User.class
+ro\autoDealerSales\web\domain\CustomerPayments.class
+ro\autoDealerSales\web\dao\UserControllerImpl.class
+ro\autoDealerSales\web\utils\ResultSetToPojoConverter.class
+ro\autoDealerSales\web\servlets\PersonalServlet.class
+ro\autoDealerSales\web\utils\DatabaseConnectionManager.class
+ro\autoDealerSales\web\domain\CarSold.class
+ro\autoDealerSales\web\domain\CustomerPreference.class
+ro\autoDealerSales\web\servlets\GeneralInfoServlet.class
+ro\autoDealerSales\web\domain\CarFeature.class
+ro\autoDealerSales\web\domain\CarForSale.class
+ro\autoDealerSales\web\dao\PersonalControllerImpl.class
