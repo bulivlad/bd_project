@@ -48,7 +48,6 @@ public class CarsServlet extends HttpServlet {
         }
         else
             if(action.equals("addOne")){
-                //TODO things for add one
 
                 RequestDispatcher requestDispatcher = context.getRequestDispatcher("/addcar.jsp");
                 requestDispatcher.include(req,resp);
