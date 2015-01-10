@@ -32,6 +32,9 @@ public class CarForSale {
         this.vehicleCategory = vehicleCategory;
     }
 
+    public CarForSale() {
+    }
+
     public Integer getId() {
         return id;
     }

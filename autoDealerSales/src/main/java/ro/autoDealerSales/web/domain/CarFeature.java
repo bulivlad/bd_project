@@ -21,6 +21,9 @@ public class CarFeature {
         return id;
     }
 
+    public CarFeature() {
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

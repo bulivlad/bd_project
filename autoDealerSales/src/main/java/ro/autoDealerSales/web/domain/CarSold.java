@@ -29,6 +29,9 @@ public class CarSold {
         this.customerId = customerId;
     }
 
+    public CarSold() {
+    }
+
     public Integer getId() {
         return id;
     }

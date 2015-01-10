@@ -1,18 +1,16 @@
-<%@ page import="ro.autoDealerSales.web.domain.User" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ page import="ro.autoDealerSales.web.domain.CarForSale" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ro.autoDealerSales.web.domain.Customer" %>
+<%@ page import="ro.autoDealerSales.web.domain.CarFeature" %>
 <%--
   Created by IntelliJ IDEA.
   User: Buli
-  Date: 12/25/2014
-  Time: 3:49 PM
+  Date: 1/4/2015
+  Time: 1:24 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
   <!-- Latest compiled and minified CSS -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -86,39 +84,38 @@
       background: #4b545f;
     }
 
+    #dataTable td{
+      padding: 40px;
+      font-size: x-large;
+    }
+
+    #dataTable div{
+      background-color: #b3b3b3;
+    }
+
+    #buttonStyle ul {
+      list-style-type: none;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #buttonStyle li {
+      display: inline;
+      padding: 20px;
+    }
+
   </style>
 
-    <title>Informatii generale</title>
+  <title>Informatii generale</title>
 
   <%
-    ServletContext context = config.getServletContext();
-    User user = (User) context.getAttribute("user");
-    ArrayList<Customer> allCustomers = (ArrayList<Customer>) request.getAttribute("allCustomers");
-
-    String sqlMessages = null;
-    Integer sqlResult = (Integer) context.getAttribute("sqlResult");
-    if(sqlResult != null)
-    {
-      if(sqlResult == 0) {
-        sqlMessages="Eroare la update. Modificarile nu au fost salvate";
-      }
-      else {
-        sqlMessages = "Modificarile au fost salvate cu succes";
-      }
-    }
+    CarForSale carsForSale = (CarForSale) request.getAttribute("carForSale");
+    CarFeature carFeature = (CarFeature) request.getAttribute("carFeatures");
   %>
 
-  <script type="text/javascript">
-    function popupOpen() {
-      if(<%=sqlResult != null%>)
-        alert("<%=sqlMessages%>");
-    }
-  </script>
-
-  <%context.removeAttribute("sqlResult");%>
-
 </head>
-<body onload="popupOpen()">
+<body>
   <div class="container">
     <div class="panel panel-default">
       <div class="jumbotron">
@@ -143,33 +140,56 @@
         </ul>
       </nav>
     </div>
+    <br><br><br>
     <div class="panel panel-default">
-      <h2>Welcome back, <%=user.getUsername()%> !</h2>
-
-      <br><br><br><br>
-
-<center>
-      <table style="width:80%" border="0">
-        <tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td><td>Actiuni</td></tr>
-        <%
-          for (Customer customer : allCustomers) {
-        %>
-        <tr><td><%=customer.getFirstName()%></td><td><%=customer.getLastName()%></td><td><%=customer.getPhone()%></td>
-          <td><%=customer.getEmail()%></td>
-          <td><form action="personal?id=<%=customer.getId()%>&action=persInfo" method="post"><input type="submit" value="View"></form></td>
-          <td><form action="editPerson?id=<%=customer.getId()%>&update=no" method="post"><input type="submit" value="Edit"></form></td>
-
+    <table id="dataTable" style="width:60%" border="0" align="center">
+      <tr>
+          <td><div class="label label-info">Marca: <%=carsForSale.getManufacturerName()%></div></td>
+          <td><div class="label label-info">Model: <%=carsForSale.getModelName()%></div></td>
+      </tr>
+      <tr>
+          <td><div class="label label-info">Categorie: <%=carsForSale.getVehicleCategory()%></div></td>
+            <%
+              if(carsForSale.getAskingPrice() != null){
+            %>
+          <td><div class="label label-info">Pret(EUR): <%=carsForSale.getAskingPrice()%></div></td>
         <%
           }
         %>
-      </table>
-</center>
+      </tr>
+      <tr>
+        <%
+          if(carsForSale.getCurrentMileage() != null){
+        %>
+          <td><div class="label label-info">Kilometrii: <%=carsForSale.getCurrentMileage()%></div></td>
+        <%
+          }
+          if(carsForSale.getDate_acquired() != null){
+        %>
+          <td><div class="label label-info">An fabricatie: <%=carsForSale.getDate_acquired()%></div></td>
+        <%
+          }
+        %>
+      </tr>
 
-      <br>
+      <%
+        if(carFeature.getDescription() != null){
+      %>
+        <tr>
+          <td><div class="label label-info">Dotari: <%=carFeature.getDescription()%></div></td>
+        </tr>
+      <%
+        }
+      %>
 
-    </div>
-
+    </table>
+      </div>
+    <div align="right">
+      <form>
+        <ul id="buttonStyle">
+          <li><button class="btn btn-large btn-primary" formmethod="post" formaction="cars?id=<%=carsForSale.getId()%>&action=deleteOne" type="submit">Stergere</button></li>
+        </ul>
+      </form></div>
   </div>
-
 </body>
 </html>

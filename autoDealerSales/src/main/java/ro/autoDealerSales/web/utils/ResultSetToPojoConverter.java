@@ -1,6 +1,8 @@
 package ro.autoDealerSales.web.utils;
 
 import org.apache.log4j.Logger;
+import ro.autoDealerSales.web.domain.CarFeature;
+import ro.autoDealerSales.web.domain.CarForSale;
 import ro.autoDealerSales.web.domain.Customer;
 import ro.autoDealerSales.web.domain.User;
 
@@ -156,4 +158,129 @@ public class ResultSetToPojoConverter {
         return rs;
     }
 
+    public static ResultSet getResultSetWithAllPersonalDataForUpdate(Connection con,String id){
+        ResultSet rs = null;
+
+        String sqlStatement = "SELECT c.customer_id, firstname, lastname, phone, email, c.other, address_id, address, town_city,\n" +
+                "                                       country, post_code,a.other as address_other, customer_preference_id, car_feature_id,\n" +
+                "                                       customer_pref_details, customer_payment_id,payment_status,customer_payment_date,\n" +
+                "                                       cs.car_sold_id, cs.agreed_price, cs.date_sold, cs.OTHER_DETAILS as carsold_other,\n" +
+                "                                       cfs.car_for_sale_id, manufacturer_name,model_name\n" +
+                "                                 from\n" +
+                "                                   customers c join addresses a on (c.customer_id = a.customer_id)\n" +
+                "                                    join customer_preferences cp on (c.customer_id = cp.customer_id)\n" +
+                "                                    join customer_payments cpay on (c.customer_id = cpay.customer_id)\n" +
+                "                                    join cars_sold cs on (c.customer_id = cs.customer_id),\n" +
+                "                                       cars_for_sale cfs join cars_sold css on (CFS.CAR_FOR_SALE_ID = CSS.CAR_FOR_SALE_ID)\n" +
+                "                                        WHERE css.customer_id = " + id +"  and c.customer_id = " + id;
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static ArrayList<CarForSale> getAllCarsForSale(Connection con){
+        ArrayList<CarForSale> carForSales = new ArrayList<CarForSale>();
+
+        String sqlStatement = "SELECT * from cars_for_sale";
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                CarForSale cfs = new CarForSale();
+                cfs.setId(rs.getInt("car_for_sale_id"));
+                cfs.setManufacturerName(rs.getString("manufacturer_name"));
+                cfs.setModelName(rs.getString("model_name"));
+                cfs.setAskingPrice(rs.getInt("asking_price"));
+                cfs.setCurrentMileage(rs.getInt("current_mileage"));
+                cfs.setVehicleCategory(rs.getString("vehicle_category"));
+                cfs.setDate_acquired(rs.getDate("date_acquired"));
+
+                carForSales.add(cfs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return carForSales;
+    }
+
+    public static CarForSale getCarForSaleById(Connection con, String id){
+        CarForSale carForSale = new CarForSale();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        String sqlString = "select * from cars_for_sale where car_for_sale_id =" + id;
+
+        try {
+            stmt = con.prepareStatement(sqlString);
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                carForSale.setId(rs.getInt("car_for_sale_id"));
+                carForSale.setManufacturerName(rs.getString("manufacturer_name"));
+                carForSale.setModelName(rs.getString("model_name"));
+                carForSale.setVehicleCategory(rs.getString("vehicle_category"));
+                carForSale.setCurrentMileage(rs.getInt("current_mileage"));
+                carForSale.setAskingPrice(rs.getInt("asking_price"));
+                carForSale.setDate_acquired(rs.getDate("date_acquired"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        return carForSale;
+    }
+
+    public static CarFeature getCarFeatureByCarForSaleId(Connection con, String id){
+        CarFeature carFeature = new CarFeature();
+
+        String sqlString = "select CAR_FEATURE_ID, CAR_FEATURE_DESCRIPTION from \n" +
+                "    car_features cf join cars_for_sale cfs on (CF.CAR_FEATURE_ID = CFS.CAR_FEATURES_ID)\n" +
+                "    \n" +
+                "    where cfs.car_for_sale_id = " + id;
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement(sqlString);
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                carFeature.setId(rs.getInt("car_feature_id"));
+                carFeature.setDescription(rs.getString("car_feature_description"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return carFeature;
+    }
 }
