@@ -28,4 +28,8 @@ public class EditPersonControllerImpl {
     public ResultSet getResultSetWithAllPersonalDataForUpdate(String id){
         return ResultSetToPojoConverter.getResultSetWithAllPersonalDataForUpdate(con, id);
     }
+
+    public ResultSet getResultSetWithAllCarsForSaleForUpdate(String id){
+        return ResultSetToPojoConverter.getResultSetWithAllCarsForSaleForUpdate(con,id);
+    }
 }

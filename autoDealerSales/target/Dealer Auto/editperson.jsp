@@ -19,95 +19,9 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-  <style>
-    body {
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    #dataTable td{
-      padding: 20px;
-      font-size: x-large;
-    }
-
-    #dataTable div{
-      background-color: #b3b3b3;
-    }
-
-    #dataTable input{
-      width: 250px;
-    }
-
-    #buttonStyle ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    #buttonStyle li {
-      display: inline;
-      padding: 20px;
-    }
-
-    nav ul ul {
-      display: none;
-    }
-
-    nav ul li:hover > ul {
-      display: block;
-    }
-    nav ul {
-      background: #efefef;
-      background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);
-      background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
-      background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
-      box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
-      padding: 0 20px;
-      border-radius: 10px;
-      list-style: none;
-      position: relative;
-      display: inline-table;
-    }
-    nav ul:after {
-      content: ""; clear: both; display: block;
-    }
-    nav ul li {
-      float: left;
-    }
-    nav ul li:hover {
-      background: #4b545f;
-      background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
-      background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
-      background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
-    }
-    nav ul li:hover a {
-      color: #fff;
-    }
-
-    nav ul li a {
-      display: block; padding: 25px 40px;
-      color: #757575; text-decoration: none;
-    }
-    nav ul ul {
-      background: #5f6975; border-radius: 0px; padding: 0;
-      position: absolute; top: 100%;
-    }
-    nav ul ul li {
-      float: none;
-      border-top: 1px solid #6b727c;
-      border-bottom: 1px solid #575f6a;
-      position: relative;
-    }
-    nav ul ul li a {
-      padding: 15px 40px;
-      color: #fff;
-    }
-    nav ul ul li a:hover {
-      background: #4b545f;
-    }
-
-  </style>
+  <%--MyCustom css--%>
+  <link href="style/oldstyle.css" rel="stylesheet">
+  <link href="style/navbar.css" rel="stylesheet">
 
   <%
     Customer cstm = (Customer) request.getAttribute("customer");
@@ -142,6 +56,12 @@
             </ul>
           </li>
           <li><a href="rapoarte">Rapoarte detaliate</a></li>
+          <li id="search">
+            <form action="" method="get">
+              <input type="text" name="search_text" id="search_text" placeholder="Search"/>
+              <input type="submit" name="search_button" id="search_button"></a>
+            </form>
+          </li>
         </ul>
       </nav>
     </div>

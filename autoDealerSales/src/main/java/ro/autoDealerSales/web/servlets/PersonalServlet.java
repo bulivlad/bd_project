@@ -54,7 +54,7 @@ public class PersonalServlet extends HttpServlet {
         ResultSet rs = personalInfo.getResultSetWithAllPersonalData(id);
 
         try {
-            if(rs.next()){
+            if (rs.next()) {
 //              Customer
 
                 cstm.setId(rs.getInt("customer_id"));
@@ -73,6 +73,14 @@ public class PersonalServlet extends HttpServlet {
                 addressCstm.setCountry(rs.getString("country"));
                 addressCstm.setPostalCode(rs.getString("post_code"));
                 addressCstm.setOther(rs.getString("address_other"));
+            }
+        }catch (SQLException e) {
+                e.printStackTrace();
+        }
+
+        rs = personalInfo.getResultSetWithAllCustomerPreferences(id);
+        try{
+            if(rs.next()){
 
 //              CustomerPreference
 
@@ -81,6 +89,14 @@ public class PersonalServlet extends HttpServlet {
                 cstmPref.setCarFeatureId(rs.getInt("car_feature_id"));
                 cstmPref.setCustomerPrefDetails(rs.getString("customer_pref_details"));
 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        rs = personalInfo.getResultSetWithAllCustomerPayments(id);
+        try{
+            if(rs.next()){
 //              CustomerPayments
 
                 cstmPay.setId(rs.getInt("customer_payment_id"));

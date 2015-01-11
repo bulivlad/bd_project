@@ -99,7 +99,7 @@ public class EditPersonServlet extends HttpServlet {
         ResultSet rs = personalInfo.getResultSetWithAllPersonalDataForUpdate(id);
 
         try {
-            if(rs.next()){
+            if (rs.next()) {
 //              Customer
 
                 cstm.setId(rs.getInt("customer_id"));
@@ -141,7 +141,14 @@ public class EditPersonServlet extends HttpServlet {
                 carSold.setCustomerId(rs.getInt("customer_id"));
                 carSold.setDateSold(rs.getDate("date_sold"));
                 carSold.setOtherDetails(rs.getString("carSold_other"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        rs = personalInfo.getResultSetWithAllCarsForSaleForUpdate(id);
+        try{
+            if(rs.next()){
 //              CarForSale
 
                 carFS.setId(rs.getInt("car_for_sale_id"));

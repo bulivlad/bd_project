@@ -3,6 +3,7 @@ package ro.autoDealerSales.web.dao;
 import ro.autoDealerSales.web.utils.DatabaseConnectionManager;
 import ro.autoDealerSales.web.utils.ResultSetToPojoConverter;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -21,5 +22,13 @@ public class PersonalControllerImpl {
 //        Nu e chiar ce trebuie dar merge
     public ResultSet getResultSetWithAllPersonalData(String id){
         return ResultSetToPojoConverter.getResultSetWithAllPersonalData(con,id);
+    }
+
+    public ResultSet getResultSetWithAllCustomerPreferences(String id){
+        return ResultSetToPojoConverter.getResultSetWithAllCustomerPreferences(con, id);
+    }
+
+    public ResultSet getResultSetWithAllCustomerPayments(String id){
+        return ResultSetToPojoConverter.getResultSetWithAllCustomerPayments(con,id);
     }
 }

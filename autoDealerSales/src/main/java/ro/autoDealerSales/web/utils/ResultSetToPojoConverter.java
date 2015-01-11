@@ -136,17 +136,110 @@ public class ResultSetToPojoConverter {
         return usersListFromDB;
     }
 
+    public static ResultSet getResultSetWithAllCustomerPreferences(Connection con, String id){
+        ResultSet rs = null;
+
+        String sqlStatement = "select c.customer_id, customer_preference_id, car_feature_id, customer_pref_details\n" +
+                "       from customers c join customer_preferences cp on (c.customer_id = cp.customer_id)\n" +
+                "       where c.customer_id=" + id;
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static ResultSet getResultSetWithAllCustomerPayments(Connection con, String id){
+        ResultSet rs = null;
+
+        String sqlStatement = " select c.customer_id, customer_payment_id, payment_status, customer_payment_date\n" +
+                "    from customers c join customer_payments cp on (c.customer_id = cp.customer_id)\n" +
+                "    where c.customer_id =" + id;
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public static ResultSet getResultSetWithAllPersonalData(Connection con,String id){
         ResultSet rs = null;
 
         String sqlStatement = "SELECT c.customer_id, firstname, lastname, phone, email, c.other, address_id, address, town_city,\n" +
-                "       country, post_code,a.other as address_other, customer_preference_id, car_feature_id, customer_pref_details,\n" +
+                "       country, post_code,a.other as address_other, \n" +
                 "       customer_payment_id,payment_status,customer_payment_date\n" +
                 " from \n" +
                 "    customers c join addresses a on (c.customer_id = a.customer_id) \n" +
-                "    join customer_preferences cp on (c.customer_id = cp.customer_id)\n" +
                 "    join customer_payments cpay on (c.customer_id = cpay.customer_id)\n" +
                 " WHERE c.customer_id =" + id;
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static ResultSet getResultSetWithAllCarsForSaleForUpdate(Connection con, String id){
+        ResultSet rs = null;
+
+        String sqlStatement = "select cfs.car_for_sale_id, manufacturer_name,model_name\n" +
+                "from cars_for_sale cfs join cars_sold css on (CFS.CAR_FOR_SALE_ID = CSS.CAR_FOR_SALE_ID)\n" +
+                "WHERE css.customer_id =" + id;
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static ResultSet getResultSetWithCarsForSearchServlet(Connection con, String searchText){
+        ResultSet rs = null;
+
+        String sqlStatement = "select cfs.manufacturer_name, cfs.model_name, cfs.asking_price\n" +
+                "    from cars_for_sale cfs \n" +
+                "     where \n" +
+                "        cfs.manufacturer_name IN (select manufacturer_name from cars_for_sale where LOWER(manufacturer_name) like '%"+ searchText +"%') \n" +
+                "         OR \n" +
+                "         cfs.model_name IN (select model_name from cars_for_sale where LOWER(model_name) like '%"+ searchText +"%')";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static ResultSet getResultSetWithNamesForSearchServlet(Connection con, String searchText){
+        ResultSet rs = null;
+
+        String sqlStatement = "select c.lastname,c.firstname, \n" +
+                "    (select a.address from addresses a  where a.customer_id = c.customer_id) as address\n" +
+                "    from customers c join addresses ad on(c.customer_id = ad.customer_id)\n" +
+                "     where (LOWER(c.firstname) like '%"+ searchText +"%') OR (LOWER(c.lastname) like '%"+ searchText +"%')";
+
         PreparedStatement stmt = null;
 
         try {
@@ -164,15 +257,13 @@ public class ResultSetToPojoConverter {
         String sqlStatement = "SELECT c.customer_id, firstname, lastname, phone, email, c.other, address_id, address, town_city,\n" +
                 "                                       country, post_code,a.other as address_other, customer_preference_id, car_feature_id,\n" +
                 "                                       customer_pref_details, customer_payment_id,payment_status,customer_payment_date,\n" +
-                "                                       cs.car_sold_id, cs.agreed_price, cs.date_sold, cs.OTHER_DETAILS as carsold_other,\n" +
-                "                                       cfs.car_for_sale_id, manufacturer_name,model_name\n" +
+                "                                       cs.car_sold_id, cs.agreed_price, cs.date_sold, cs.OTHER_DETAILS as carsold_other\n" +
                 "                                 from\n" +
                 "                                   customers c join addresses a on (c.customer_id = a.customer_id)\n" +
                 "                                    join customer_preferences cp on (c.customer_id = cp.customer_id)\n" +
                 "                                    join customer_payments cpay on (c.customer_id = cpay.customer_id)\n" +
-                "                                    join cars_sold cs on (c.customer_id = cs.customer_id),\n" +
-                "                                       cars_for_sale cfs join cars_sold css on (CFS.CAR_FOR_SALE_ID = CSS.CAR_FOR_SALE_ID)\n" +
-                "                                        WHERE css.customer_id = " + id +"  and c.customer_id = " + id;
+                "                                    join cars_sold cs on (c.customer_id = cs.customer_id)\n" +
+                "                                        WHERE c.customer_id =" + id;
         PreparedStatement stmt = null;
 
         try {

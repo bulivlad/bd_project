@@ -2,13 +2,16 @@ ro\autoDealerSales\web\domain\Address.class
 ro\autoDealerSales\web\domain\Customer.class
 ro\autoDealerSales\web\dao\CustomerControllerImpl.class
 ro\autoDealerSales\web\utils\DBOperations.class
+ro\autoDealerSales\web\servlets\SearchServlet.class
 ro\autoDealerSales\web\dao\UserControllerImpl.class
 ro\autoDealerSales\web\servlets\PersonalServlet.class
 ro\autoDealerSales\web\utils\DatabaseConnectionManager.class
 ro\autoDealerSales\web\domain\CarSold.class
+ro\autoDealerSales\web\servlets\RapoarteServlet.class
 ro\autoDealerSales\web\dao\PersonalControllerImpl.class
 ro\autoDealerSales\web\dao\DeletePersonControllerImpl.class
 ro\autoDealerSales\web\servlets\DeletePersonServlet.class
+ro\autoDealerSales\web\dao\SearchControllerImpl.class
 ro\autoDealerSales\web\servlets\EditPersonServlet.class
 ro\autoDealerSales\web\domain\CustomerPayments.class
 ro\autoDealerSales\web\domain\User.class

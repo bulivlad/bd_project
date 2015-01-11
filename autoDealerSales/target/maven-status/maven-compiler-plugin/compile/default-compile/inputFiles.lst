@@ -7,6 +7,7 @@ C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDeale
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\domain\CarForSale.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\dao\EditPersonControllerImpl.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\DeletePersonServlet.java
+C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\dao\SearchControllerImpl.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\domain\CarFeature.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\utils\DatabaseConnectionManager.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\GeneralInfoServlet.java
@@ -15,11 +16,13 @@ C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDeale
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\dao\CarsControllerImpl.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\domain\Address.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\dao\CustomerControllerImpl.java
+C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\RapoarteServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\domain\User.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\LoginServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\utils\DBOperations.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\PersonalServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\dao\PersonalControllerImpl.java
+C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\SearchServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\EditPersonServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\AddPersonServlet.java
 C:\Users\Buli\IdeaProjects\BD_Project\autoDealerSales\src\main\java\ro\autoDealerSales\web\servlets\CarsServlet.java

@@ -30,13 +30,13 @@
       padding: 19px 29px 29px;
       margin: 0 auto 20px;
       background-color: #fff;
-      border: 1px solid #e5e5e5;
+      border: 1px solid #232323;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      -webkit-box-shadow: 0 1px 2px rgb(35,35,35);
+      -moz-box-shadow: 0 1px 2px rgb(35,35,35);
+      box-shadow: 0 1px 2px rgb(35,35,35);
     }
     .form-signin .form-signin-heading,
     .form-signin .checkbox {

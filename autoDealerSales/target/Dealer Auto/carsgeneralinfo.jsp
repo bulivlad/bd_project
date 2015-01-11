@@ -21,71 +21,9 @@
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-      <style>
-        body {
-          padding-top: 40px;
-          padding-bottom: 40px;
-          background-color: #f5f5f5;
-        }
-
-        nav ul ul {
-          display: none;
-        }
-
-        nav ul li:hover > ul {
-          display: block;
-        }
-        nav ul {
-          background: #efefef;
-          background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);
-          background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
-          background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
-          box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
-          padding: 0 20px;
-          border-radius: 10px;
-          list-style: none;
-          position: relative;
-          display: inline-table;
-        }
-        nav ul:after {
-          content: ""; clear: both; display: block;
-        }
-        nav ul li {
-          float: left;
-        }
-        nav ul li:hover {
-          background: #4b545f;
-          background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
-          background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
-          background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
-        }
-        nav ul li:hover a {
-          color: #fff;
-        }
-
-        nav ul li a {
-          display: block; padding: 25px 40px;
-          color: #757575; text-decoration: none;
-        }
-        nav ul ul {
-          background: #5f6975; border-radius: 0px; padding: 0;
-          position: absolute; top: 100%;
-        }
-        nav ul ul li {
-          float: none;
-          border-top: 1px solid #6b727c;
-          border-bottom: 1px solid #575f6a;
-          position: relative;
-        }
-        nav ul ul li a {
-          padding: 15px 40px;
-          color: #fff;
-        }
-        nav ul ul li a:hover {
-          background: #4b545f;
-        }
-
-      </style>
+  <%--MyCustom css--%>
+  <link href="style/oldstyle.css" rel="stylesheet">
+  <link href="style/navbar.css" rel="stylesheet">
 
       <title>Informatii generale</title>
 
@@ -136,7 +74,19 @@
                   <li><a href="cars?action=addOne">Adaugare</a></li>
                 </ul>
               </li>
-              <li><a href="rapoarte">Rapoarte detaliate</a></li>
+              <li><a href="#">Rapoarte detaliate</a>
+                <ul>
+                  <li><a href="cars?action=viewAll">Raport 1</a></li>
+                  <li><a href="cars?action=viewAll">Raport 2</a></li>
+                  <li><a href="cars?action=viewAll">Raport 3</a></li>
+                </ul>
+              </li>
+              <li id="search">
+                <form action="" method="get">
+                  <input type="text" name="search_text" id="search_text" placeholder="Search"/>
+                  <input type="submit" name="search_button" id="search_button"></a>
+                </form>
+              </li>
             </ul>
           </nav>
         </div>
@@ -144,14 +94,14 @@
       <br><br><br>
 
       <center>
-        <table style="width:70%" border="0">
+        <table id="firstTable" style="width:70%" border="0">
           <tr><td>Marca</td><td>Model</td><td>Pret(EUR)</td><td>Actiuni</td></tr>
           <%
             for (CarForSale carForSale : carsForSale) {
           %>
           <tr><td><%=carForSale.getManufacturerName()%></td><td><%=carForSale.getModelName()%></td><td><%=carForSale.getAskingPrice()%></td>
             <td><form action="cars?id=<%=carForSale.getId()%>&action=viewOne" method="post"><input type="submit" value="View"></form></td>
-            <td><form action="cars?id=<%=carForSale.getId()%>&action=editOne&update=no" method="post"><input type="submit" value="Edit"></form></td>
+            <%--<td><form action="cars?id=<%=carForSale.getId()%>&action=editOne&update=no" method="post"><input type="submit" value="Edit"></form></td>--%>
           <%
             }
           %>
