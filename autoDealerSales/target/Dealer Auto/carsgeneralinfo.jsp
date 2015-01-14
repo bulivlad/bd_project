@@ -74,19 +74,19 @@
                   <li><a href="cars?action=addOne">Adaugare</a></li>
                 </ul>
               </li>
-              <li><a href="#">Rapoarte detaliate</a>
-                <ul>
-                  <li><a href="cars?action=viewAll">Raport 1</a></li>
-                  <li><a href="cars?action=viewAll">Raport 2</a></li>
-                  <li><a href="cars?action=viewAll">Raport 3</a></li>
-                </ul>
-              </li>
-              <li id="search">
-                <form action="" method="get">
-                  <input type="text" name="search_text" id="search_text" placeholder="Search"/>
-                  <input type="submit" name="search_button" id="search_button"></a>
-                </form>
-              </li>
+                <li><a href="#">Facturi</a>
+                    <ul>
+                        <li><a href="invoice?action=viewAll">Vizualizare</a></li>
+                    </ul>
+                </li>
+                <left>
+                    <li id="search">
+                        <form action="search" method="get">
+                            <input type="text" name="search_text" id="search_text" placeholder="Search"/>
+                            <input type="submit" id="search_button"></a>
+                        </form>
+                    </li>
+                </left>
             </ul>
           </nav>
         </div>

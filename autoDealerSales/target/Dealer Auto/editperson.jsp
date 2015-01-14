@@ -55,20 +55,27 @@
               <li><a href="cars?action=addOne">Adaugare</a></li>
             </ul>
           </li>
-          <li><a href="rapoarte">Rapoarte detaliate</a></li>
-          <li id="search">
-            <form action="" method="get">
-              <input type="text" name="search_text" id="search_text" placeholder="Search"/>
-              <input type="submit" name="search_button" id="search_button"></a>
-            </form>
+          <li><a href="#">Facturi</a>
+            <ul>
+              <li><a href="invoice?action=viewAll">Vizualizare</a></li>
+            </ul>
           </li>
+          <left>
+            <li id="search">
+              <form action="search" method="get">
+                <input type="text" name="search_text" id="search_text" placeholder="Search"/>
+                <input type="submit" id="search_button"></a>
+              </form>
+            </li>
+          </left>
         </ul>
       </nav>
     </div>
 
     <form>
     <div class="panel panel-default">
-      <table id="dataTable" style="width:60%" border="0" align="center">
+      <center>
+      <table id="dataTable" style="width:60%" border="0">
         <tr>
           <td><div class="label label-info">Prenume*: </div><input name="firstName" type="text" required="required" value="<%=cstm.getFirstName()%>"></td>
           <td><div class="label label-info">Nume*: </div><input name="lastName" type="text" required="required" value="<%=cstm.getLastName()%>"></td>
@@ -139,6 +146,7 @@
           <td><div class="label label-info">Alte detalii: </div><input name="otherSold" type="text" value="<%=carSold.getOtherDetails() != null ? carSold.getOtherDetails() : ""%>"></td>
         </tr>
       </table>
+      </center>
     </div>
 
 

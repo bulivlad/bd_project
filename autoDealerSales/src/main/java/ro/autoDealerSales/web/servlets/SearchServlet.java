@@ -1,6 +1,10 @@
 package ro.autoDealerSales.web.servlets;
 
 import ro.autoDealerSales.web.dao.SearchControllerImpl;
+import ro.autoDealerSales.web.domain.Address;
+import ro.autoDealerSales.web.domain.CarForSale;
+import ro.autoDealerSales.web.domain.Customer;
+import ro.autoDealerSales.web.domain.HybridPerson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -31,17 +36,18 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ResultSet rs = null;
-
         String searchText = req.getParameter("search_text");
+        ArrayList<Customer> customersArrayList = new ArrayList<Customer>();
+        ArrayList<Address> addressArrayList = new ArrayList<Address>();
 
         SearchControllerImpl searchController = new SearchControllerImpl();
-        //TODO de prelucrat resultset-urile
-        rs = searchController.getResultSetWithNamesForSearchServlet(searchText);
 
+        ArrayList<HybridPerson> hybridPersonArrayList = searchController.getResultSetWithNamesForSearchServlet(searchText);
 
-        rs = searchController.getResultSetWithCarsForSearchServlet(searchText);
+        ArrayList<CarForSale> carForSaleArrayList = searchController.getArrayListWithCarsForSearchServlet(searchText);
 
+        req.setAttribute("hybridPersonArrayList",hybridPersonArrayList);
+        req.setAttribute("carForSaleArrayList",carForSaleArrayList);
 
 
         RequestDispatcher requestDispatcher = context.getRequestDispatcher("/search.jsp");

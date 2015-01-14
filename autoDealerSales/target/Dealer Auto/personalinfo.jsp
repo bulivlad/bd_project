@@ -66,13 +66,19 @@
               <li><a href="cars?action=addOne">Adaugare</a></li>
             </ul>
           </li>
-          <li><a href="rapoarte">Rapoarte</a></li>
-          <li id="search">
-            <form action="" method="get">
-              <input type="text" name="search_text" id="search_text" placeholder="Search"/>
-              <input type="submit" name="search_button" id="search_button"></a>
-            </form>
+          <li><a href="#">Facturi</a>
+            <ul>
+              <li><a href="invoice?action=viewAll">Vizualizare</a></li>
+            </ul>
           </li>
+          <left>
+            <li id="search">
+              <form action="search" method="get">
+                <input type="text" name="search_text" id="search_text" placeholder="Search"/>
+                <input type="submit" id="search_button"></a>
+              </form>
+            </li>
+          </left>
         </ul>
       </nav>
     </div>
@@ -83,7 +89,7 @@
     %>
       <div class="label label-info">Date personale</div>
       <center>
-      <table id="dataTable" style="width:60%" border="0" align="center">
+      <table id="dataTable" style="width:60%" border="0" >
         <tr>
           <td><div class="label label-info">Prenume: <%=cstm.getFirstName()%></div></td>
           <td><div class="label label-info">Nume: <%=cstm.getLastName()%></div></td>
@@ -119,6 +125,7 @@
     }
   %>
       </table>
+      </center>
       </div>
       <div align="right">
         <form>
@@ -134,6 +141,7 @@
     %>
 
       <div class="label label-info">Preferinte</div>
+    <center>
       <table id="dataTable1" style="width:60%" border="0" align="center">
         <tr>
           <td><div class="label label-info">Preferintele clientului: <%=cstmPref.getCustomerPrefDetails()%></div></td>

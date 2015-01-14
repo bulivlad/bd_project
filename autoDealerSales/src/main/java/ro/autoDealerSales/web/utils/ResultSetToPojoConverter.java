@@ -1,10 +1,7 @@
 package ro.autoDealerSales.web.utils;
 
 import org.apache.log4j.Logger;
-import ro.autoDealerSales.web.domain.CarFeature;
-import ro.autoDealerSales.web.domain.CarForSale;
-import ro.autoDealerSales.web.domain.Customer;
-import ro.autoDealerSales.web.domain.User;
+import ro.autoDealerSales.web.domain.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -211,10 +208,92 @@ public class ResultSetToPojoConverter {
         return rs;
     }
 
-    public static ResultSet getResultSetWithCarsForSearchServlet(Connection con, String searchText){
+    public static int getNumberOfInvoicesNotPaidOrUnpaid(Connection con, String paidStatus){
+        int numberOfInvoices = 0;
+
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        String sqlStatement = "SELECT COUNT(cp.payment_status) as counter \n" +
+                "    FROM invoices i JOIN customers c ON (i.customer_id = c.customer_id)\n" +
+                "                    JOIN cars_sold cs ON (i.car_sold_id = cs.car_sold_id)\n" +
+                "                    JOIN customer_payments cp ON (i.customer_payment_id = cp.customer_payment_id),\n" +
+                "         cars_sold css JOIN cars_for_sale cfs ON (css.car_for_sale_id = cfs.car_for_sale_id) \n" +
+                "    WHERE i.customer_id = css.customer_id and cp.payment_status = '"+ paidStatus +"'";
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                numberOfInvoices = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfInvoices;
+    }
+
+    public static ArrayList<HybridInvoice> getArrayListWithHybridInvoices(Connection con){
+        ArrayList<HybridInvoice> hybridInvoiceArrayList = new ArrayList<HybridInvoice>();
+
         ResultSet rs = null;
 
-        String sqlStatement = "select cfs.manufacturer_name, cfs.model_name, cfs.asking_price\n" +
+        String sqlStatement = "SELECT c.customer_id, c.firstname, c.lastname, cfs.manufacturer_name, cfs.model_name, cp.payment_status, cs.agreed_price\n" +
+                "    FROM invoices i JOIN customers c ON (i.customer_id = c.customer_id)\n" +
+                "                    JOIN cars_sold cs ON (i.car_sold_id = cs.car_sold_id)\n" +
+                "                    JOIN customer_payments cp ON (i.customer_payment_id = cp.customer_payment_id),\n" +
+                "         cars_sold css JOIN cars_for_sale cfs ON (css.car_for_sale_id = cfs.car_for_sale_id) \n" +
+                "    WHERE i.customer_id = css.customer_id\n" +
+                "    ORDER BY payment_status DESC";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sqlStatement);
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                HybridInvoice hybridInvoice = new HybridInvoice();
+
+                Customer customer = new Customer();
+
+                customer.setId(rs.getInt("customer_id"));
+                customer.setFirstName(rs.getString("firstname"));
+                customer.setLastName(rs.getString("lastname"));
+                hybridInvoice.setCustomer(customer);
+
+                CarForSale carForSale = new CarForSale();
+
+                carForSale.setManufacturerName(rs.getString("manufacturer_name"));
+                carForSale.setModelName(rs.getString("model_name"));
+                hybridInvoice.setCarForSale(carForSale);
+
+                CustomerPayments customerPayments = new CustomerPayments();
+
+                customerPayments.setPaymentStatus(rs.getString("payment_status"));
+                hybridInvoice.setCustomerPayments(customerPayments);
+
+                CarSold carSold = new CarSold();
+
+                carSold.setAgreedPrice("agreed_price");
+                hybridInvoice.setCarSold(carSold);
+
+                hybridInvoiceArrayList.add(hybridInvoice);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hybridInvoiceArrayList;
+    }
+
+    public static ArrayList<CarForSale> getArrayListWithCarsForSearchServlet(Connection con, String searchText){
+        ResultSet rs = null;
+
+        String sqlStatement = "select cfs.car_for_sale_id, cfs.manufacturer_name, cfs.model_name, cfs.asking_price\n" +
                 "    from cars_for_sale cfs \n" +
                 "     where \n" +
                 "        cfs.manufacturer_name IN (select manufacturer_name from cars_for_sale where LOWER(manufacturer_name) like '%"+ searchText +"%') \n" +
@@ -223,32 +302,75 @@ public class ResultSetToPojoConverter {
 
         PreparedStatement stmt = null;
 
+        ArrayList<CarForSale> cars = new ArrayList<CarForSale>();
+
         try {
             stmt = con.prepareStatement(sqlStatement);
             rs = stmt.executeQuery();
+
+            while(rs.next()){
+                CarForSale carFromSearch = new CarForSale();
+
+                carFromSearch.setId(rs.getInt("car_for_sale_id"));
+                carFromSearch.setManufacturerName(rs.getString("manufacturer_name"));
+                carFromSearch.setModelName(rs.getString("model_name"));
+                carFromSearch.setAskingPrice(rs.getInt("asking_price"));
+
+                cars.add(carFromSearch);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+        finally {
+            try {
+                if(stmt != null) stmt.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return cars;
     }
 
-    public static ResultSet getResultSetWithNamesForSearchServlet(Connection con, String searchText){
+    public static ArrayList<HybridPerson> getResultSetWithNamesForSearchServlet(Connection con, String searchText){
         ResultSet rs = null;
 
-        String sqlStatement = "select c.lastname,c.firstname, \n" +
+        String sqlStatement = "select c.customer_id, c.lastname,c.firstname, ad.address_id, \n" +
                 "    (select a.address from addresses a  where a.customer_id = c.customer_id) as address\n" +
                 "    from customers c join addresses ad on(c.customer_id = ad.customer_id)\n" +
                 "     where (LOWER(c.firstname) like '%"+ searchText +"%') OR (LOWER(c.lastname) like '%"+ searchText +"%')";
 
         PreparedStatement stmt = null;
 
+        ArrayList<HybridPerson> hybridPersonArrayList = new ArrayList<HybridPerson>();
+
         try {
             stmt = con.prepareStatement(sqlStatement);
             rs = stmt.executeQuery();
+
+            while(rs.next()){
+                Customer customer = new Customer();
+                Address address = new Address();
+
+                customer.setId(rs.getInt("customer_id"));
+                customer.setLastName(rs.getString("lastname"));
+                customer.setFirstName(rs.getString("firstname"));
+
+                address.setId(rs.getInt("address_id"));
+                address.setAddress(rs.getString("address"));
+
+                HybridPerson person = new HybridPerson();
+                person.setCustomer(customer);
+                person.setAddress(address);
+
+                hybridPersonArrayList.add(person);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+
+        return hybridPersonArrayList;
     }
 
     public static ResultSet getResultSetWithAllPersonalDataForUpdate(Connection con,String id){

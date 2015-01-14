@@ -77,7 +77,11 @@
             </ul>
           </li>
           <li></li>
-          <li><a href="rapoarte">Rapoarte detaliate</a></li>
+          <li><a href="#">Facturi</a>
+            <ul>
+              <li><a href="invoice?action=viewAll">Vizualizare</a></li>
+            </ul>
+          </li>
           <left>
           <li id="search">
             <form action="search" method="get">
