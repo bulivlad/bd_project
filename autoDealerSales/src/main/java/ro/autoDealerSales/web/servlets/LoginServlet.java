@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         }
         else {
             PrintWriter out = resp.getWriter();
-            String error = "<font color=\"red\">Oops..Seems that your username or password is incorect. Please chec again !</font>";
+            String error = "<font color=\"red\">Oops..Seems that your username or password is incorect. Please check again !</font>";
             out.println(error);
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             requestDispatcher.include(req,resp);

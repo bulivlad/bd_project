@@ -61,6 +61,11 @@ public class DBOperations {
         return result;
     }
 
+    /**
+     * Add informations into the database
+     * @param sqlStrings
+     * @return number of modified rows
+     */
     public static int add(ArrayList<String> sqlStrings){
         DatabaseConnectionManager dbconnection = DatabaseConnectionManager.getInstance();
         Connection con = dbconnection.getConnection();

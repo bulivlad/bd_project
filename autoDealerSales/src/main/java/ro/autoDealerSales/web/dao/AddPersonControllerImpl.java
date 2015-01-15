@@ -18,6 +18,11 @@ public class AddPersonControllerImpl {
         this.con = dbconnection.getConnection();
     }
 
+    /**
+     * Add info into the database
+     * @param sqlStrings - Array list with all insert statement
+     * @return number of modified rows
+     */
     public int addInfoIntoDB(ArrayList<String> sqlStrings){
         return DBOperations.add(sqlStrings);
     }

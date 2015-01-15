@@ -23,7 +23,6 @@ public class InvoiceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO de implementat servlet-ul pentru facturi
 
         InvoiceControllerImpl invoiceController = new InvoiceControllerImpl();
 

@@ -397,6 +397,11 @@ public class ResultSetToPojoConverter {
         return rs;
     }
 
+    /**
+     * Get all cars for sale
+     * @param con database connection
+     * @return Array List with all cars for sale
+     */
     public static ArrayList<CarForSale> getAllCarsForSale(Connection con){
         ArrayList<CarForSale> carForSales = new ArrayList<CarForSale>();
 
@@ -428,6 +433,12 @@ public class ResultSetToPojoConverter {
         return carForSales;
     }
 
+    /**
+     * Get car for sale by id
+     * @param con - database connection
+     * @param id - car for sale id
+     * @return the car for sale object
+     */
     public static CarForSale getCarForSaleById(Connection con, String id){
         CarForSale carForSale = new CarForSale();
 
@@ -463,6 +474,12 @@ public class ResultSetToPojoConverter {
         return carForSale;
     }
 
+    /**
+     * Get car featur by car for sale id
+     * @param con - database connection
+     * @param id - car for sale id
+     * @return the car feature object
+     */
     public static CarFeature getCarFeatureByCarForSaleId(Connection con, String id){
         CarFeature carFeature = new CarFeature();
 

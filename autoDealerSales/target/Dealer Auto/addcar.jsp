@@ -35,7 +35,7 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="jumbotron">
-      <h1 class="panel-title">Informatii generale</h1>
+      <h1 class="panel-title">Adaugare masina</h1>
     </div>
 
     <nav>
