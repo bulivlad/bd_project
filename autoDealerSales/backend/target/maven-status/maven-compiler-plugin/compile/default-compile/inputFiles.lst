@@ -1,0 +1,17 @@
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\utils\DatabaseConnectionManager.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\user\UserDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\invoice\InvoiceDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\utils\DBOperations.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\customer\CustomerDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\car\CarDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\search\SearchDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\car\CarDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\user\UserDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\utils\ResultSetToPojoConverter.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\personal\PersonalDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\person\PersonDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\personal\PersonalDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\search\SearchDaoImpl.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\customer\CustomerDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\person\PersonDao.java
+D:\PERSONAL\Tema\Proiect bd\bd_project\autoDealerSales\backend\src\main\java\ro\autoDealerSales\web\dao\invoice\InvoiceDaoImpl.java

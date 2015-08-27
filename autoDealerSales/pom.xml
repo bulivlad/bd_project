@@ -3,15 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ro.autoDealerSales.web</groupId>
   <artifactId>autoDealerSales</artifactId>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
   <version>1.0</version>
   <name>Dealer Auto</name>
   <url>http://maven.apache.org</url>
+
   <dependencies>
       <dependency>
-          <groupId>log4j</groupId>
-          <artifactId>log4j</artifactId>
-          <version>1.2.17</version>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>1.7.1</version>
       </dependency>
       <dependency>
           <groupId>com.oracle</groupId>
@@ -21,21 +22,31 @@
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
-          <version>3.1.0</version>
+          <version>3.0.1</version>
       </dependency>
   </dependencies>
   <build>
-    <finalName>Dealer Auto</finalName>
+    <finalName>DealerAuto</finalName>
       <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>2.1.1</version>
+          </plugin>
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>tomcat-maven-plugin</artifactId>
               <version>1.1</version>
               <configuration>
                   <server>local_tomcat</server>
-                  <url>http://localhost:8082/manager/text</url>
+                  <url>http://localhost:8089/text</url>
               </configuration>
           </plugin>
       </plugins>
   </build>
+    <modules>
+        <module>frontend</module>
+        <module>backend</module>
+        <module>commons</module>
+    </modules>
 </project>

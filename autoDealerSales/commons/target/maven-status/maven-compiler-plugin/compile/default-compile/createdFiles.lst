@@ -1,0 +1,10 @@
+ro\autoDealerSales\web\domain\Address.class
+ro\autoDealerSales\web\domain\CarSold.class
+ro\autoDealerSales\web\domain\CustomerPreference.class
+ro\autoDealerSales\web\domain\Customer.class
+ro\autoDealerSales\web\domain\user\User.class
+ro\autoDealerSales\web\domain\CustomerPayments.class
+ro\autoDealerSales\web\domain\CarFeature.class
+ro\autoDealerSales\web\domain\CarForSale.class
+ro\autoDealerSales\web\domain\HybridPerson.class
+ro\autoDealerSales\web\domain\HybridInvoice.class
