@@ -286,7 +286,7 @@ public class ResultSetToPojoConverter {
 
                 CarSold carSold = new CarSold();
 
-                carSold.setAgreedPrice("agreed_price");
+                carSold.setAgreedPrice(rs.getString("agreed_price"));
                 hybridInvoice.setCarSold(carSold);
 
                 hybridInvoiceArrayList.add(hybridInvoice);

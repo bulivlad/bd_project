@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 
         String username = req.getParameter("usernameForm");
         String password = req.getParameter("passwordForm");
-        
+
         User userFromJspForm = new User(username,password);
 
         UserDao uc = new UserDaoImpl(userFromJspForm);
